@@ -5,10 +5,8 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const bcrypt = require('bcryptjs');
 const cookieParser = require('cookie-parser');
-const OpenAI = require('openai')
 const cors = require('cors');
 require('dotenv').config();
-
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.json());
@@ -265,6 +263,17 @@ app.post('/recuritmentsDelete', async (req, res) => {
         return
     }
 })
+
+app.post("/chat", async (req, res) => {
+    const { prompt } = req.body;
+  
+    const completion = await openai.createCompletion({
+      model: "gpt-4o-mini",
+      prompt: prompt,
+    });
+    console.log(completion.data.choices[0].text);
+    res.send(completion.data.choices[0].text);
+  });
 
 app.listen(3030, () => {
     console.log(`http://localhost:3030에 서버가 실행 되었습니다.`);

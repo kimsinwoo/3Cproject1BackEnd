@@ -35,8 +35,5 @@ model Recruitment {
 
 model Competition {
   id                Int      @id @default(autoincrement())
-  title             String   @db.VarChar(500)
-  description       String?  @db.Text
-  applicationDates  String?  @db.VarChar(500)
-  prizes            String?  @db.Text
+  content            String   @db.VarChar(600)
 }
